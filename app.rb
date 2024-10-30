@@ -64,7 +64,7 @@ class WordGuesserApp < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
 
-  
+  port = ENV['PORT'] || 8080
   
 
   before do
