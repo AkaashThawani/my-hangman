@@ -1,28 +1,37 @@
-<% if flash[:message] %>
-   <div class="alert alert-danger">
-     <span class="error"><%= flash[:message] %></span>
-   </div>
+<% if @error %>
+  <div class="alert alert-danger" role="alert">
+    <%= @error %>
+  </div>
 <% end %>
 
-<div class="alert alert-warning">
-  <p class="lead">
-    Wrong Guesses:
-    <span class="guesses"><%= @game.wrong_guesses %></span>
-  </p>
+<div class="card mb-4">
+  <div class="card-body text-center">
+    <h5 class="card-title">Word: <%= @game.word_with_guesses %></h5>
+    <p class="card-text">Correct guesses: <%= @game.guesses %></p>
+    <p class="card-text">Wrong guesses: <%= @game.wrong_guesses %></p>
+  </div>
 </div>
 
-<p class="alert alert-success">
-  Word so far:
-  <span class="word"><%= @game.word_with_guesses %></span>
-</p>
-
-<form action="/guess" method="post">
-  <div class="form-group row">
-    <label for="guess" class="col-md-2 col-form-label">Guess a letter:</label>
-    <input type="text" name="guess" autocomplete="off"
-           class="form-control col-md-1"/>
-    <input type="submit" value="Guess!" class="col-md-2 btn btn-success"/>
+<form action="/guess" method="post" class="text-center">
+  <div class="form-group">
+    <input type="text" name="letter" class="form-control mx-auto" maxlength="1" placeholder="Guess a letter" required style="width: 200px;">
   </div>
+  <button type="submit" class="btn btn-primary" <% if @game_status != :play %>disabled<% end %>>Guess</button>
 </form>
 
-<%= erb :new %>
+<% if @message %>
+  <div class="alert alert-info mt-3" role="alert">
+    <%= @message %>
+  </div>
+<% end %>
+
+<% case @game.check_win_or_lose %>
+<% when :win %>
+    <form action="/try_again" method="post" class="mt-2">
+      <button type="submit" class="btn btn-success">Try Again</button>
+    </form>
+<% when :lose %>
+   <form action="/try_again" method="post" class="mt-2">
+      <button type="submit" class="btn btn-success">Try Again</button>
+    </form>
+<% end %>

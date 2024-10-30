@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Wordguesser</title>
+    <title>HANGMAN</title>
   </head>
   <body>
-    <div class="jumbotron">
-      <h1 class="display-4">Play Wordguesser!</h1>
+    <div class="jumbotron bg-white">
+      <h1 class="display-4 font-weight-bold">HANGMAN</h1>
+      <div class="font-weight-normal">
+        <br>The computer will generate a word for you.<br>
+        <br>The number of letters in the word is the same as the number of * shown below.<br>
+        <br>You have 7 wrong guess<br>
+      </div>
     </div>
     <div class="container">
       <%= yield %>
